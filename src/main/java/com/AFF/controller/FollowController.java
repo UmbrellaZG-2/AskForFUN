@@ -1,9 +1,11 @@
 package com.AFF.controller;
 
 
-import org.springframework.web.bind.annotation.RequestMapping;
+import com.AFF.dto.Result;
+import com.AFF.service.IFollowService;
+import org.springframework.web.bind.annotation.*;
 
-import org.springframework.web.bind.annotation.RestController;
+import javax.annotation.Resource;
 
 /**
  * <p>
@@ -17,4 +19,21 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/follow")
 public class FollowController {
 
+    @Resource
+    IFollowService followService;
+
+    @PutMapping("/{id}/{isFollow}")
+    public Result follow(@PathVariable("id")  Long followedUserId, @PathVariable("isFollow") Boolean isFollow){
+        return followService.follow(followedUserId, isFollow);
+    }
+
+    @GetMapping("/or/not/{id}")
+    public Result isFollow(@PathVariable("id") Long followUserId){
+        return followService.isFollow(followUserId);
+    }
+
+    @GetMapping("/common/{id}")
+    public Result followCommons(@PathVariable("id") Long id){
+        return followService.followCommons(id);
+    }
 }
