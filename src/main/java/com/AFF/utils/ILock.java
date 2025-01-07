@@ -12,7 +12,4 @@ public interface ILock {
      */
     void unlock();
 
-//    boolean isLocked();
-//
-//    boolean isHeldByCurrentThread();
 }
